@@ -1,0 +1,31 @@
+{
+"name": "portfoliovanilla",
+  "version": "1.0.0",
+  "description": "Mohit Naskar's Portfolio Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohitNaskar/PortfolioVanilla.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohitNaskar/PortfolioVanilla/issues"
+  },
+  "homepage": "https://github.com/MohitNaskar/PortfolioVanilla#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.3"
+  }
+}
