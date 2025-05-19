@@ -10,6 +10,31 @@ const app = express();
 const PORT = process.env.PORT || 5000; // Fixed order of PORT declaration
 
 // Middleware
+// app.use(cors({
+//     origin: function(origin, callback) {
+//         // Allow requests with no origin (like mobile apps or curl requests)
+//         if (!origin) return callback(null, true);
+        
+//         // List of allowed origins
+//         const allowedOrigins = [
+//             'http://localhost:5500',
+//             'http://127.0.0.1:5500',
+//             'https://mohitnaskar.netlify.app',
+//             process.env.FRONTEND_URL
+//         ].filter(Boolean); // Remove any undefined values
+        
+//         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     methods: ["GET", "POST", "OPTIONS"],
+//     credentials: true,
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
+// Middleware
 app.use(cors({
     origin: function(origin, callback) {
         // Allow requests with no origin (like mobile apps or curl requests)
@@ -19,14 +44,19 @@ app.use(cors({
         const allowedOrigins = [
             'http://localhost:5500',
             'http://127.0.0.1:5500',
-            'https://mohitnaskar.netlify.app',
-            process.env.FRONTEND_URL
-        ].filter(Boolean); // Remove any undefined values
+            'https://mohitnaskar.netlify.app'
+        ];
         
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        // Check if environment variable exists and add it
+        if (process.env.FRONTEND_URL) {
+            allowedOrigins.push(process.env.FRONTEND_URL);
+        }
+        
+        if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            console.log(`Origin ${origin} not allowed by CORS`);
+            callback(null, false);
         }
     },
     methods: ["GET", "POST", "OPTIONS"],
